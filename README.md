@@ -13,3 +13,8 @@ I took advantage of *Firebase and it's Firestore Database*, which integrates wel
 * Each event has it's Event Details page, with all it's details and the location on the map using Google Maps API (I will add functionality to display the nearest events, sorted by the interests of the user).
 * Chat will be added soon.
 
+### Demo:
+
+[![Watch the video](/WatchTheVideo.png)](https://youtu.be/Y-UDCIFfucs)
+
+
