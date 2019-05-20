@@ -1,6 +1,6 @@
 ## Social Events - React Application
 
-In this project I created an Events application with React, similiar to *'Meetup'*.<br>
+In this project I created an Events application with React, similar to *'Meetup'*.<br>
 I put emphasize on **UI & UX**, making it look great and make the user experience as fluent as possible.<br>
 I took advantage of *Firebase and it's Firestore Database*, which integrates well with React and offers to us 'live-data', to display real- time changes as the user integrates with our application.
 
