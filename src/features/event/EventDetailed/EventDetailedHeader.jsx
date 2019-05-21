@@ -18,13 +18,13 @@ const eventImageTextStyle = {
 
 const EventDetailedHeader = ({ event, isHost, isGoing, joinEvent, cancelJoinEvent }) => {
   let eventDate;
-  if (event.date) eventDate = event.date.toDate();
+  if ( event && event.date) eventDate = event.date.toDate();
 
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${event.category}.jpg`}
+          src={event && `/assets/categoryImages/${event.category}.jpg`}
           fluid
           style={eventImageStyle}
         />
@@ -34,12 +34,12 @@ const EventDetailedHeader = ({ event, isHost, isGoing, joinEvent, cancelJoinEven
               <Item.Content>
                 <Header
                   size="huge"
-                  content={event.title}
+                  content={event && event.title}
                   style={{ color: "white" }}
                 />
                 <p>{format(eventDate, "dddd, Do MMMM")}</p>
                 <p>
-                  Hosted by <strong>{event.hostedBy}</strong>
+                  Hosted by <strong>{event && event.hostedBy}</strong>
                 </p>
               </Item.Content>
             </Item>

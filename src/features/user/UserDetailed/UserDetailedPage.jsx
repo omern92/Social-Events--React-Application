@@ -36,6 +36,8 @@ const mapState = (state, ownProps) => {
     {
       userUid,
       user,
+      events: state.events,
+      eventsLoading: state.async.loading,
       auth: state.firebase.auth,
       photos: state.firestore.ordered.photos,
       requesting: state.firestore.status.requesting,
@@ -49,12 +51,16 @@ const actions = {
 class UserDetailedPage extends Component {
 
   async componentDidMount() {
-    let events = this.props.getUserEvents(this.props.userUid, 2);
-    console.log(events);
+    await this.props.getUserEvents(this.props.userUid);
+  }
+
+  handleTabChange = (e, data) => {
+    console.log('activeIndex', data.activeIndex);
+    this.props.getUserEvents(this.props.userUid, data.activeIndex);
   }
 
   render() {
-    const { user, photos, auth, match, requesting } = this.props;
+    const { user, events, eventsLoading, photos, auth, match, requesting } = this.props;
     const isCurrentUser = auth.uid === match.params.id;
     const loading = Object.values(requesting).some(a => a === true);
     
@@ -67,7 +73,7 @@ class UserDetailedPage extends Component {
         <UserDetailedDesc user={user} />
         <UserDetailedSidebar isCurrentUser={isCurrentUser} />
         <UserDetailedPhotos photos={photos} />
-        <UserDetailedEvents />
+        <UserDetailedEvents events={events} eventsLoading={eventsLoading} handleTabChange={this.handleTabChange} />
       </Grid>
     );
   }

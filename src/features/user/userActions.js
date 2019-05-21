@@ -3,6 +3,7 @@ import moment from 'moment';
 import cuid from 'cuid';
 import { asyncActionStart, asyncActionFinish, asyncActionError } from '../async/asyncActions';
 import firebase from '../../app/config/firebase';
+import { FETCH_EVENTS } from '../event/eventConstants';
 
 export const updateProfile = (user) => 
   async (dispatch, getState, {getFirebase}) => {
@@ -174,8 +175,17 @@ export const getUserEvents = (userUid, activeTab) =>
           .orderBy("eventDate", "desc");
     }
     try {
+      dispatch(asyncActionStart());
       const querySnap = await query.get();
-      console.log(querySnap);
+      let events = [];
+      
+      for (let i=0; i < querySnap.docs.length; i++) {
+        let evt = await firestore.collection('events').doc(querySnap.docs[i].data().eventId).get();
+        events.push({...evt.data(), id: evt.id});
+      }
+      console.log('events from UserActions', events);
+      dispatch({ type: FETCH_EVENTS, events });
+      dispatch(asyncActionFinish());
 
     } catch (error) {
       console.log(error);

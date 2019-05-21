@@ -25,7 +25,7 @@ class EventDetailedInfo extends Component {
     const { event } = this.props;
     const { isMapOpen } = this.state;
     let eventDate;
-    if (event.date) {
+    if (event && event.date) {
       eventDate = event.date.toDate();
     }  
 
@@ -37,7 +37,7 @@ class EventDetailedInfo extends Component {
               <Icon size="large" color="teal" name="info" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <p>{event.description}</p>
+              <p>{event && event.description}</p>
             </Grid.Column>
           </Grid>
         </Segment>
@@ -60,7 +60,7 @@ class EventDetailedInfo extends Component {
               <Icon name="marker" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={12}>
-              <span>{event.venue}</span>
+              <span>{event && event.venue}</span>
             </Grid.Column>
             <Grid.Column width={3}>
               <Button
@@ -70,7 +70,7 @@ class EventDetailedInfo extends Component {
                 onClick={this.toggleMap}
               />
             </Grid.Column>
-            {isMapOpen && <Map lat={event.venueLatLng.lat} lng={event.venueLatLng.lng} />}
+            {isMapOpen && <Map lat={event && event.venueLatLng.lat} lng={event && event.venueLatLng.lng} />}
           </Grid>
         </Segment>
       </Segment.Group>
